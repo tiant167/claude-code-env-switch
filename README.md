@@ -1,73 +1,34 @@
-# React + TypeScript + Vite
+# 🎭 Claude Env Manager
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An elegant, native macOS menubar application designed to hot-switch environment variable configurations for [Claude Code](https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview). Manage multiple model provider setups and instantly swap between them with a single click right from your status bar.
 
-Currently, two official plugins are available:
+![Screenshot](public/screenshot.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## ✨ Features
 
-## React Compiler
+- **Mac-Native Experience**: Runs cleanly in the background with a polished dark-glassmorphic UI and a custom Template icon that seamlessly adapts to your system's Dark/Light themes.
+- **Dynamic JSON Configurations**: Forget rigid forms. Input and edit your environment states as raw JSON payloads (`{"env": {...}}`).
+- **Fail-Safe Switch & Backup**: 
+  - Automatically captures the live `~/.claude/settings.json` state immediately *before* performing any switch, saving an immutable **Backup Config** directly in your Provider list. If anything breaks, standardizing on the Backup permanently restores your prior working state effortlessly.
+  - Zero-overwrites on core CLI settings. It strictly replaces the `"env"` layer logic in the target background file and preserves every other plugin and marketplace configuration exactly as-is.
+- **Safety Validations**: Rejects environments missing appropriate `ANTHROPIC_AUTH_TOKEN` entries to ensure your active environment never gets disabled accidentally by an empty form payload.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 Getting Started
 
-## Expanding the ESLint configuration
+1. Clone this repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Run locally:
+   ```bash
+   npm run dev
+   ```
+4. Build binary distributables:
+   ```bash
+   npm run build
+   ```
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🛠 Tech Stack
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Built solidly on top of **Electron**, **Vite**, and **React** with a completely un-styled pure vanilla CSS architectural skeleton optimized for native `-webkit-app-region` implementations. Variables and persistent settings handled gracefully via `electron-store`.
