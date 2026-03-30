@@ -6,7 +6,7 @@ An elegant, native macOS menubar application designed to hot-switch environment 
 
 ## ✨ Features
 
-- **Mac-Native Experience**: Runs cleanly in the background with a polished dark-glassmorphic UI and a custom Template icon that seamlessly adapts to your system's Dark/Light themes.
+- **Mac-Native Experience**: Runs cleanly in the background with a polished dark-glassmorphic UI and a custom Template icon that seamlessly adapts to your system's Dark/Light themes. Operates as a pure stealth menubar utility, keeping your Dock and `Cmd+Tab` switcher completely clutter-free.
 - **Dynamic JSON Configurations**: Forget rigid forms. Input and edit your environment states as raw JSON payloads (`{"env": {...}}`).
 - **Fail-Safe Switch & Backup**: 
   - Automatically captures the live `~/.claude/settings.json` state immediately *before* performing any switch, saving an immutable **Backup Config** directly in your Provider list. If anything breaks, standardizing on the Backup permanently restores your prior working state effortlessly.
