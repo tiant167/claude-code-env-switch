@@ -173,7 +173,7 @@ ipcMain.handle('fetch-balance', async (event, providerId: string) => {
 app.whenReady().then(() => {
   // Hide the app from the Dock and Cmd+Tab switcher since this is a pure Menubar app
   if (process.platform === 'darwin') {
-    app.dock.hide();
+    app.dock?.hide();
   }
 
   createWindow();
