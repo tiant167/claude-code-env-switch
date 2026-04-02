@@ -5,7 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build && electron-builder",
+    "build:pre": "tsc && vite build",
+    "build": "npm run build:pre && electron-builder --mac",
+    "build:x64": "npm run build:pre && electron-builder --mac --x64",
+    "build:arm64": "npm run build:pre && electron-builder --mac --arm64",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -45,7 +48,12 @@
       "package.json"
     ],
     "mac": {
-      "target": ["zip"]
+      "target": [
+        {
+          "target": "zip",
+          "arch": ["x64", "arm64"]
+        }
+      ]
     }
   }
 }
