@@ -32,6 +32,18 @@ jobs:
           npm run build:pre
           npx electron-builder --mac --${{ matrix.arch }} --publish never
 
+      - name: Rename artifact for consistent naming
+        run: |
+          cd dist
+          # electron-builder may omit arch suffix for default arch, normalize it
+          shopt -s nullglob
+          for f in *-mac.zip; do
+            if [[ "$f" != *"-${{ matrix.arch }}-"* ]]; then
+              new_name="${f%-mac.zip}-${{ matrix.arch }}-mac.zip"
+              mv "$f" "$new_name"
+            fi
+          done
+
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
