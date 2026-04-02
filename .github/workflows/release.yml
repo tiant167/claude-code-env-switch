@@ -10,15 +10,9 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [macos-13, macos-14]
         arch: [x64, arm64]
-        exclude:
-          - os: macos-13
-            arch: arm64
-          - os: macos-14
-            arch: x64
 
-    runs-on: ${{ matrix.os }}
+    runs-on: macos-latest
 
     steps:
       - name: Checkout code
@@ -36,9 +30,7 @@ jobs:
       - name: Build application
         run: |
           npm run build:pre
-          npx electron-builder --mac --${{ matrix.arch }}
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          npx electron-builder --mac --${{ matrix.arch }} --publish never
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
